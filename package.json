@@ -7,6 +7,7 @@
     "dev": "vite --host 0.0.0.0",
     "build": "vite build",
     "preview": "vite preview --host 0.0.0.0",
+    "seo:image": "node scripts/generate-social-preview.mjs",
     "test:contact": "node --test supabase/tests/portfolio-inquiry.test.js"
   },
   "dependencies": {
