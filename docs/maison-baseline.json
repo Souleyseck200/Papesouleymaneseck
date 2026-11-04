@@ -1,0 +1,8 @@
+{
+  "projectId": "dgdxvdercbfikmystyob",
+  "columnsHash": "08c20eae0242a9d160409e52cd738ee1",
+  "functionsHash": "d923c9f07ca76cf0f4f7db68e458b99d",
+  "policiesHash": "c7f1906558af4dd83dbbf2e381e24c06",
+  "edgeFunctions": { "login": 2, "admin-users": 2, "bootstrap-admin": 4, "upgrade-admin-email": 2 },
+  "scope": "All existing public columns, functions and policies, excluding portfolio_ objects"
+}

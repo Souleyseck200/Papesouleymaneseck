@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+!supabase/.env.portfolio.example
+*.log
+/docs/contact-live-test.json
+/docs/contact-delivery-verification.json
+supabase/.temp/

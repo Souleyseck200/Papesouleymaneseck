@@ -1,0 +1,225 @@
+{
+  "nps": {
+    "pages": 26,
+    "mobile": 0,
+    "routeFiles": 0,
+    "pageExamples": [
+      "src/pages/admin/AdminBlog.tsx",
+      "src/pages/admin/AdminContacts.tsx",
+      "src/pages/admin/AdminDashboard.tsx",
+      "src/pages/admin/AdminEvents.tsx",
+      "src/pages/admin/AdminLogin.tsx",
+      "src/pages/admin/AdminProjects.tsx",
+      "src/pages/admin/AdminRegistrations.tsx",
+      "src/pages/admin/ArgonBlog.tsx"
+    ]
+  },
+  "siggil": {
+    "pages": 36,
+    "mobile": 0,
+    "routeFiles": 0,
+    "pageExamples": [
+      "REACT/src/pages/AdminCategories.tsx",
+      "REACT/src/pages/AdminDashboard.tsx",
+      "REACT/src/pages/AdminLogin.tsx",
+      "REACT/src/pages/Auth.tsx",
+      "REACT/src/pages/Cart.tsx",
+      "REACT/src/pages/Checkout.tsx",
+      "REACT/src/pages/Contact.tsx",
+      "REACT/src/pages/Delivery.tsx"
+    ]
+  },
+  "alertsec": {
+    "pages": 29,
+    "mobile": 14,
+    "routeFiles": 16,
+    "pageExamples": [
+      "admin-desktop/src/renderer/src/pages/AgentsView.tsx",
+      "admin-desktop/src/renderer/src/pages/AnalyticsIA.tsx",
+      "admin-desktop/src/renderer/src/pages/AnalyticsView.tsx",
+      "admin-desktop/src/renderer/src/pages/ArchivesView.tsx",
+      "admin-desktop/src/renderer/src/pages/AuditLogView.tsx",
+      "admin-desktop/src/renderer/src/pages/CommandCenter.tsx",
+      "admin-desktop/src/renderer/src/pages/DashboardView.tsx",
+      "admin-desktop/src/renderer/src/pages/LoginPage.tsx"
+    ]
+  },
+  "edukora": {
+    "pages": 66,
+    "mobile": 0,
+    "routeFiles": 125,
+    "pageExamples": [
+      "src/app/admin/announcements/page.tsx",
+      "src/app/admin/backups/page.tsx",
+      "src/app/admin/billing/page.tsx",
+      "src/app/admin/catalog/page.tsx",
+      "src/app/admin/contracts/page.tsx",
+      "src/app/admin/monitoring/page.tsx",
+      "src/app/admin/page.tsx",
+      "src/app/admin/reports/page.tsx"
+    ]
+  },
+  "viva": {
+    "pages": 35,
+    "mobile": 0,
+    "routeFiles": 0,
+    "pageExamples": [
+      "src/pages/admin/AdminGodMode.tsx",
+      "src/pages/admin/DevTools.tsx",
+      "src/pages/Amenagement.tsx",
+      "src/pages/APropos.tsx",
+      "src/pages/Assistance.tsx",
+      "src/pages/Batiment.tsx",
+      "src/pages/Blog.tsx",
+      "src/pages/BlogPost.tsx"
+    ]
+  },
+  "axis": {
+    "pages": 9,
+    "mobile": 0,
+    "routeFiles": 0,
+    "pageExamples": [
+      "src/platform/routes/Access.tsx",
+      "src/platform/routes/Invitation.tsx",
+      "src/platform/routes/LegacyModule.tsx",
+      "src/views/admin/DashboardView.tsx",
+      "src/views/admin/LoginView.tsx",
+      "src/views/admin/ProjectWorkspaceView.tsx",
+      "src/views/admin/SettingsView.tsx",
+      "src/views/public/PublicIntakeView.tsx"
+    ]
+  },
+  "jokko": {
+    "pages": 13,
+    "mobile": 13,
+    "routeFiles": 8,
+    "pageExamples": [
+      "mobile/app/(auth)/login.tsx",
+      "mobile/app/(auth)/onboarding.tsx",
+      "mobile/app/(auth)/register.tsx",
+      "mobile/app/(tabs)/calls.tsx",
+      "mobile/app/(tabs)/contacts.tsx",
+      "mobile/app/(tabs)/index.tsx",
+      "mobile/app/(tabs)/settings.tsx",
+      "mobile/app/call/active.tsx"
+    ]
+  },
+  "maritime": {
+    "pages": 0,
+    "mobile": 0,
+    "routeFiles": 7,
+    "pageExamples": []
+  },
+  "affiliation": {
+    "pages": 12,
+    "mobile": 0,
+    "routeFiles": 0,
+    "pageExamples": [
+      "src/pages/admin/DashboardPage.tsx",
+      "src/routes/app.admin.tsx",
+      "src/routes/app.analyste.tsx",
+      "src/routes/app.apporteur.tsx",
+      "src/routes/app.influenceur.tsx",
+      "src/routes/auth.demande-influenceur.tsx",
+      "src/routes/auth.forgot-password.tsx",
+      "src/routes/auth.login.tsx"
+    ]
+  },
+  "maison": {
+    "pages": 0,
+    "mobile": 0,
+    "routeFiles": 0,
+    "pageExamples": []
+  },
+  "house": {
+    "pages": 1,
+    "mobile": 0,
+    "routeFiles": 0,
+    "pageExamples": [
+      "src/pages/Dashboard.tsx"
+    ]
+  },
+  "astronet": {
+    "pages": 0,
+    "mobile": 0,
+    "routeFiles": 0,
+    "pageExamples": []
+  },
+  "timekeeper": {
+    "pages": 9,
+    "mobile": 0,
+    "routeFiles": 5,
+    "pageExamples": [
+      "src/pages/About.tsx",
+      "src/pages/admin/Dashboard.tsx",
+      "src/pages/Attendance.tsx",
+      "src/pages/Contact.tsx",
+      "src/pages/Index.tsx",
+      "src/pages/Login.tsx",
+      "src/pages/NotFound.tsx",
+      "src/pages/Onboarding.tsx"
+    ]
+  },
+  "agro": {
+    "pages": 16,
+    "mobile": 0,
+    "routeFiles": 10,
+    "pageExamples": [
+      "resources/views/admin/animals.blade.php",
+      "resources/views/admin/dashboard.blade.php",
+      "resources/views/admin/users.blade.php",
+      "resources/views/animals/create.blade.php",
+      "resources/views/animals/edit.blade.php",
+      "resources/views/animals/index.blade.php",
+      "resources/views/animals/show.blade.php",
+      "resources/views/auth/login.blade.php"
+    ]
+  },
+  "edupro": {
+    "pages": 2,
+    "mobile": 0,
+    "routeFiles": 12,
+    "pageExamples": [
+      "resources/views/bulletins/pdf.blade.php",
+      "resources/views/welcome.blade.php"
+    ]
+  },
+  "dashboard": {
+    "pages": 1,
+    "mobile": 0,
+    "routeFiles": 6,
+    "pageExamples": [
+      "resources/views/welcome.blade.php"
+    ]
+  },
+  "promessenger": {
+    "pages": 15,
+    "mobile": 0,
+    "routeFiles": 19,
+    "pageExamples": [
+      "resources/views/auth/confirm-password.blade.php",
+      "resources/views/auth/forgot-password.blade.php",
+      "resources/views/auth/login.blade.php",
+      "resources/views/auth/register.blade.php",
+      "resources/views/auth/reset-password.blade.php",
+      "resources/views/auth/verify-email.blade.php",
+      "resources/views/dashboard.blade.php",
+      "resources/views/layouts/app.blade.php"
+    ]
+  },
+  "opendevin": {
+    "pages": 28,
+    "mobile": 0,
+    "routeFiles": 42,
+    "pageExamples": [
+      "frontend/src/routes/accept-tos.tsx",
+      "frontend/src/routes/api-keys.tsx",
+      "frontend/src/routes/app-settings.tsx",
+      "frontend/src/routes/billing.tsx",
+      "frontend/src/routes/browser-tab.tsx",
+      "frontend/src/routes/changes-tab.tsx",
+      "frontend/src/routes/conversation.tsx",
+      "frontend/src/routes/git-settings.tsx"
+    ]
+  }
+}

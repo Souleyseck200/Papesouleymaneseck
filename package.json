@@ -1,0 +1,42 @@
+{
+  "name": "pape-souleymane-seck-portfolio",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "test:contact": "node --test supabase/tests/portfolio-inquiry.test.js"
+  },
+  "dependencies": {
+    "@fontsource/roboto": "^5.3.0",
+    "@hookform/resolvers": "^7.0.2",
+    "@phosphor-icons/react": "^2.1.10",
+    "@radix-ui/react-accordion": "^1.3.1",
+    "@radix-ui/react-dialog": "^1.3.1",
+    "@radix-ui/react-slot": "^1.5.0",
+    "@radix-ui/react-tooltip": "^1.4.1",
+    "@tailwindcss/vite": "^4.3.4",
+    "@xyflow/react": "^12.12.1",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "embla-carousel-react": "^8.6.0",
+    "framer-motion": "^12.23.12",
+    "mermaid": "^11.10.1",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-hook-form": "^7.91.0",
+    "react-zoom-pan-pinch": "^4.2.0",
+    "tailwind-merge": "^3.7.0",
+    "tailwindcss": "^4.3.4",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.1",
+    "@vitejs/plugin-react": "^5.0.0",
+    "sharp": "^0.35.5",
+    "supabase": "3.0.0",
+    "vite": "^7.1.2"
+  }
+}
