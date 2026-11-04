@@ -316,7 +316,7 @@ export const deepProjects = {
     sources: ['README.md','contracts/schema.sql','contracts/protocol.ts','mobile/src/realtime/dispatcher.ts','mobile/src/store/messageStore.ts','server/src/ws/handlers/message.ts'],
   },
   axis: {
-    purpose: 'Axis rassemble le cadrage des projets clients, leur espace de travail et un volet site/académie. Le parcours de découverte aide un client à préciser son idée; les services d’IA préparent des questions et des livrables que je peux relire et exploiter pour la conception.',
+    purpose: 'Axis rassemble le cadrage des projets clients, leur espace de travail et un volet site/académie. Le parcours de découverte aide un client à préciser son idée; les services d’IA préparent des questions et des livrables qui alimentent la revue et la conception.',
     front: [
       ['Brief et espace projet', 'PublicIntakeView collecte le besoin; les vues admin regroupent tableau de bord, paramètres et espace projet. Les modales de création, le client API et le studio de modélisation relient le parcours client au travail de conception.'],
       ['Modélisation et documents', 'ProjectModelingStudio et Mermaid affichent la structure du projet. Les exports et archives regroupent les livrables; la discussion de cadrage sert de contexte à l’assistant.'],

@@ -17,7 +17,7 @@ import { cn } from './lib/utils'
 
 const enrich = project => {
   const deep=deepProjects[project.id]||deepExtras[project.id]
-  return { ...project, role:project.id==='opendevin'?'Adaptation personnelle du projet open source':'Conception et développement réalisés seul', flows:deep?.steps||project.flows, deep,
+  return { ...project, flows:deep?.steps||project.flows, deep,
     ...(project.id==='siggil'?{stack:['React 19','TypeScript','React Router','Context / reducer','Supabase','Tailwind CSS']}:{}),
     ...(project.id==='nps'?{stack:['React 18','TypeScript','Vite','TanStack Query','Supabase','shadcn/ui']}:{}),
   }
@@ -31,6 +31,7 @@ const colors = {
   viva: { card:'bg-[#e8e4fc]', soft:'bg-[#f6f3ff]', text:'text-[#7d68b2]', image:'/images/real-estate.webp', short:'Des biens immobiliers aux écritures comptables.', type:'Immobilier', year:'Client · 2026' },
   jokko: { card:'bg-[#dceeff]', soft:'bg-[#f1f7fc]', text:'text-[#4f81aa]', short:'Des messages qui reprennent le fil après une coupure.', type:'Communication', year:'Projet personnel' },
   axis: { card:'bg-[#ffe5d2]', soft:'bg-[#fff4ec]', text:'text-[#b16b32]', short:'Du brief client au dossier de conception assisté par IA.', type:'IA appliquée', year:'Axis' },
+  opendevin: { card:'bg-[#e6e9f7]', soft:'bg-[#f5f6fc]', text:'text-[#6672a3]', short:'Un agent de développement, du brief aux actions dans un dépôt.', type:'Agent IA', year:'OpenHands' },
   maritime: { card:'bg-[#dceae7]', soft:'bg-[#f0f7f5]', text:'text-[#487b71]', image:'/images/maritime.webp', short:'Transformer une scène satellite en observation située.', type:'Géospatial', year:'Recherche & prototype' },
 }
 
@@ -66,7 +67,7 @@ function Miniature({ project }) {
   return <div className="relative flex h-full items-center justify-center overflow-hidden px-6">
     <div className="w-full rounded-2xl border border-white/70 bg-white/70 p-4 shadow-[0_12px_35px_#00000008]">
       <div className="mb-4 flex gap-1.5"><span className="size-1.5 rounded-full bg-neutral-300"/><span className="size-1.5 rounded-full bg-neutral-300"/><span className="size-1.5 rounded-full bg-neutral-300"/></div>
-      {(project.id==='jokko' ? ['Message envoyé','Accusé serveur','Reprise après reconnexion'] : ['Brief client','Questions de cadrage','Dossier de conception']).map((item,i)=><div key={item} className={cn('mb-2 flex items-center gap-2 rounded-lg p-2.5 text-[10px]',i===1?'ml-5 bg-neutral-900 text-white':'mr-5 bg-white text-neutral-600')}><span className="size-1 rounded-full bg-current opacity-50"/>{item}</div>)}
+      {(project.id==='jokko' ? ['Message envoyé','Accusé serveur','Reprise après reconnexion'] : project.id==='opendevin' ? ['Consigne reçue','Actions dans le workspace','Événements en direct'] : ['Brief client','Questions de cadrage','Dossier de conception']).map((item,i)=><div key={item} className={cn('mb-2 flex items-center gap-2 rounded-lg p-2.5 text-[10px]',i===1?'ml-5 bg-neutral-900 text-white':'mr-5 bg-white text-neutral-600')}><span className="size-1 rounded-full bg-current opacity-50"/>{item}</div>)}
     </div>
   </div>
 }
@@ -103,7 +104,7 @@ function ProjectStudy({ project, index }) {
   return <article id={project.id} className="scroll-mt-24 border-t border-neutral-100 py-16 sm:py-20">
     <div className="mb-8 flex flex-col gap-6 md:flex-row md:items-end md:justify-between"><div><div className="mb-4 flex flex-wrap gap-2"><span className={cn('rounded-md px-2.5 py-1 text-[10px] font-medium',theme.card)}>{theme.type}</span><span className="rounded-md bg-neutral-100 px-2.5 py-1 text-[10px] text-neutral-500">{project.status}</span></div><h3 className="text-[clamp(2.5rem,5vw,5rem)] leading-none font-bold tracking-[-.055em]">{project.title}</h3></div><p className="max-w-110 text-base leading-snug tracking-[-.02em] text-neutral-500 sm:text-xl">{project.lead}</p></div>
     <div className="grid items-start gap-8 lg:grid-cols-[.75fr_1.25fr] lg:gap-12">
-      <div className="pt-1"><div className="mb-7"><h4 className="mb-2.5 text-sm font-medium">Le besoin</h4><p className="text-sm leading-relaxed text-neutral-500">{project.challenge}</p></div><div className="mb-7"><h4 className="mb-2.5 text-sm font-medium">Réalisation de bout en bout</h4><p className="text-sm leading-relaxed text-neutral-500">{project.solution}</p></div><div className={cn('rounded-2xl p-5',theme.soft)}><p className={cn('mb-2 text-xs font-medium',theme.text)}>Un choix de conception</p><p className="text-xs leading-relaxed text-neutral-600">{project.decision}</p></div><div className="mt-6 flex flex-wrap gap-1.5">{project.stack.map(item=><span key={item} className="rounded-full border border-neutral-200 px-2.5 py-1.5 text-[10px] text-neutral-500">{item}</span>)}</div><p className="mt-5 text-[11px] leading-relaxed text-neutral-400">{project.role}</p></div>
+      <div className="pt-1"><div className="mb-7"><h4 className="mb-2.5 text-sm font-medium">Le besoin</h4><p className="text-sm leading-relaxed text-neutral-500">{project.challenge}</p></div><div className="mb-7"><h4 className="mb-2.5 text-sm font-medium">Réalisation de bout en bout</h4><p className="text-sm leading-relaxed text-neutral-500">{project.solution}</p></div><div className={cn('rounded-2xl p-5',theme.soft)}><p className={cn('mb-2 text-xs font-medium',theme.text)}>Un choix de conception</p><p className="text-xs leading-relaxed text-neutral-600">{project.decision}</p></div><div className="mt-6 flex flex-wrap gap-1.5">{project.stack.map(item=><span key={item} className="rounded-full border border-neutral-200 px-2.5 py-1.5 text-[10px] text-neutral-500">{item}</span>)}</div></div>
       <ProjectDiagrams project={project}/>
     </div>
     <ProjectDepth project={project} deep={project.deep}/>

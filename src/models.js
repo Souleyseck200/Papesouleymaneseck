@@ -97,6 +97,13 @@ export const models = {
       int receiver_id FK
       string content
     }`,
+  opendevin: `flowchart LR
+    TASK[(app_conversation_start_task)] -->|app_conversation_id| META[(conversation_metadata)]
+    TASK -->|sandbox_id| SANDBOX[(v1_remote_sandbox)]
+    META -->|sandbox_id| SANDBOX
+    CALLBACK[(event_callback)] -->|conversation_id| META
+    RESULT[(event_callback_result)] -->|event_callback_id| CALLBACK
+    RESULT -->|event_id| STORE[(Event Store · hors tables SQL)]`,
   timekeeper: `erDiagram
     USERS ||--o{ PASSKEYS : possede
     USERS ||--o{ QR_CHALLENGES : recoit
@@ -171,5 +178,13 @@ export const logicalModels = {
   promessenger: [
     ['users','Compte, rôle et attributs de profil.'],
     ['messages','Expéditeur, destinataire, contenu et dates de création.'],
+  ],
+  opendevin: [
+    ['conversation_metadata','conversation_id, user_id, dépôt, branche, titre, modèle, version, sandbox_id et métriques de tokens/coût.'],
+    ['app_conversation_start_task','Tâche asynchrone de démarrage : créateur, statut, requête, conversation associée, sandbox et URL du serveur agent.'],
+    ['v1_remote_sandbox','Identifiant du sandbox, utilisateur créateur et spécification du runtime distant.'],
+    ['event_callback / event_callback_result','Callbacks rattachés à une conversation; résultats reliés au callback et à un event_id.'],
+    ['Event Store','Actions et observations ordonnées conservées par conversation; les événements ne sont pas une table de conversation_metadata.'],
+    ['Liens entre entités','Les colonnes d’identifiant assurent les rapprochements logiques décrits ici; elles ne sont pas toutes des contraintes de clé étrangère SQL.'],
   ],
 }

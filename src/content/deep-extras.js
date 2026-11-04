@@ -270,18 +270,69 @@ export const deepExtras = {
     sources:['README.md','src/contexts/CartContext.tsx','src/services/orderService.ts','src/services/productService.ts','src/pages/Checkout.tsx'],
   },
   opendevin: {
-    purpose:'Ce dépôt est une base OpenHands/OpenDevin existante. Le travail personnel à documenter porte sur ses adaptations locales de démarrage, migrations, frontend et packaging, et non sur la paternité de tout le produit open source.',
-    front:[['Build et intégration','Les changements locaux concernent notamment Vite et la manière dont le serveur retrouve les fichiers compilés du frontend.']],
-    back:[['Démarrage et distribution','Les écarts locaux portent sur Alembic, le démarrage Python et l’empaquetage du CLI. Leur attribution précise doit rester isolée du code upstream.']],
-    methods:['Lecture d’une base existante','Intégration build frontend et serveur','Packaging Python','Analyse de migrations'],
-    lifecycle:'La source upstream demeure distincte des adaptations locales. Un patch et son scénario de validation permettent de documenter exactement le travail personnel.',
-    steps:['Comprendre la structure du projet upstream.','Repérer le scénario local de démarrage ou de packaging.','Isoler les changements Vite, serveur, migrations ou CLI.','Documenter le résultat des adaptations sans attribuer tout le produit.'],
-    architecture:`flowchart LR
-      CLI[CLI Python] --> SERVER[Serveur OpenHands]
-      MIG[Alembic et initialisation] --> SERVER
-      VITE[Frontend React et build Vite] --> STATIC[Fichiers compilés]
-      STATIC --> SERVER
-      SERVER --> UI[Interface servie]`,
-    sources:['frontend/vite.config.ts','openhands-cli/pyproject.toml','openhands/server/listen.py'],
+    purpose:'OpenHands est une plateforme d’agent IA pour le développement logiciel. Une consigne est traitée dans une conversation reliée à un dépôt et à un environnement de travail où l’agent peut utiliser les outils de code; les actions et leurs résultats restent visibles dans l’interface.',
+    front:[['Conversation et outils','L’application React / TypeScript s’appuie sur React Router et Vite. Ses routes couvrent notamment la conversation, les paramètres du modèle, les intégrations, le terminal, le navigateur, les changements de fichiers et le plan de travail. Monaco affiche le code; xterm fournit le terminal dans l’interface.'],['API et flux en direct','Les appels REST créent ou consultent les conversations et leurs paramètres. Socket.IO transporte les actions et observations en temps réel. Le client transmet l’identifiant de conversation et le dernier événement reçu pour reprendre le flux après une coupure.'],['Adaptation du frontend','La configuration Vite définit l’alias de source, le mode SPA sans SSR et les proxys de développement vers les endpoints API, WebSocket et Socket.IO. Le serveur Python ne monte les fichiers de l’interface que lorsque le dossier compilé existe.']],
+    back:[['Serveur FastAPI et Socket.IO','FastAPI assemble les routes de conversations, fichiers, Git, paramètres, secrets, sécurité, santé et API v1. L’application ASGI est enveloppée par Socket.IO; les connexions de conversation sont validées avant leur rattachement au gestionnaire de conversations.'],['Agent, actions et runtime','Le gestionnaire relie la conversation au flux d’événements et au runtime. Un registre sélectionne les environnements Docker / event stream, local, distant, Kubernetes ou CLI. L’agent émet des actions; l’environnement exécute les outils et renvoie des observations.'],['Métadonnées, tâches et événements','La migration Alembic crée notamment conversation_metadata, app_conversation_start_task et v1_remote_sandbox. Les métadonnées conservent l’utilisateur, le dépôt, la branche, le titre, les métriques de modèle et l’identifiant de sandbox; la tâche suit la création et l’état de démarrage. Les événements de la conversation passent par l’Event Store, séparé des métadonnées SQL.'],['Démarrage et packaging','Les adaptations locales rendent le montage du frontend conditionnel, ajoutent un réglage pour ignorer Alembic au démarrage et détectent une base déjà à la révision courante. La configuration Hatch inclut le paquet Python du CLI dans le wheel.']],
+    methods:['Interface SPA React Router avec build Vite','Proxy de développement REST, WebSocket et Socket.IO','Contrats API et flux d’événements temps réel','Rejeu des événements à partir du dernier identifiant reçu','Abstraction de plusieurs runtimes et environnements isolés','Métadonnées SQL et événements de conversation séparés','Migrations Alembic et packaging Hatch du CLI'],
+    lifecycle:'La création d’une conversation initialise une tâche de démarrage et associe un environnement d’exécution. Les métadonnées SQL conservent propriétaire, dépôt, branche, modèle, métriques et sandbox; l’Event Store conserve les actions et observations ordonnées. Socket.IO diffuse le flux à l’interface. À la reconnexion, le serveur relit les événements à partir du dernier identifiant reçu avant de rattacher le client à la conversation active.',
+    steps:['L’utilisateur choisit un dépôt, formule une tâche et configure le modèle.','L’interface React envoie les paramètres et la demande de conversation à l’API FastAPI.','La création du runtime est suivie dans app_conversation_start_task; les métadonnées de conversation sont stockées dans conversation_metadata.','Le serveur sélectionne un runtime compatible et ouvre l’environnement de travail.','Le navigateur rejoint le flux Socket.IO avec l’identifiant de conversation et le dernier événement connu.','Le gestionnaire transmet les actions de l’utilisateur à la boucle de conversation et à l’agent.','Le runtime exécute les outils dans le dépôt et renvoie des observations.','Les actions et observations sont ajoutées à l’Event Store puis diffusées à l’interface.','Le terminal, les changements de fichiers et les états de l’agent se mettent à jour au fil du flux.','Après une reconnexion, le serveur rejoue les événements manquants puis rattache le client à la conversation active.'],
+    architecture:`flowchart TB
+      subgraph CLIENT[Interface de développement]
+        UI[React / TypeScript · React Router]
+        EDITOR[Monaco · fichiers et changements]
+        TERMINAL[xterm · terminal]
+        BROWSER[Onglet navigateur · plan · paramètres]
+        UI --> EDITOR
+        UI --> TERMINAL
+        UI --> BROWSER
+      end
+      UI -->|REST| API[FastAPI · routes et services]
+      UI <-->|Socket.IO · actions et événements| SIO[Socket.IO ASGI]
+      API --> META[(conversation_metadata)]
+      API --> TASK[(app_conversation_start_task)]
+      API --> SANDBOX[(v1_remote_sandbox)]
+      API --> MANAGER[Gestionnaire de conversations]
+      SIO -->|validation, replay, rattachement| MANAGER
+      MANAGER --> SELECTOR[Registre de runtimes]
+      SELECTOR --> DOCKER[Docker / event stream]
+      SELECTOR --> LOCAL[Local]
+      SELECTOR --> REMOTE[Remote]
+      SELECTOR --> K8S[Kubernetes]
+      SELECTOR --> CLI[CLI]
+      DOCKER & LOCAL & REMOTE & K8S & CLI --> AGENT[Agent et outils]
+      AGENT -->|actions| EXEC[Exécution dans le workspace]
+      EXEC -->|observations| EVENTS[Flux d’événements]
+      EVENTS --> STORE[(Event Store par conversation)]
+      EVENTS --> SIO
+      STORE -->|replay depuis latest_event_id| SIO`,
+    sequence:`sequenceDiagram
+      actor Dev as Développeur
+      participant UI as Interface React
+      participant API as API FastAPI
+      participant CM as Gestionnaire de conversations
+      participant RT as Runtime
+      participant AG as Agent
+      participant ES as Event Store
+      participant WS as Socket.IO
+      Dev->>UI: Choisir un dépôt et formuler une tâche
+      UI->>API: Créer la conversation et ses paramètres
+      API->>CM: Enregistrer la demande de démarrage
+      CM->>RT: Sélectionner et initialiser l’environnement
+      RT-->>CM: Workspace prêt
+      CM-->>API: Conversation initialisée
+      API-->>UI: Identifiant et métadonnées de conversation
+      UI->>WS: Connexion avec conversation_id et latest_event_id
+      WS->>CM: Valider l’accès et rattacher le client
+      Dev->>UI: Envoyer une instruction ou une action
+      UI->>WS: Émettre l’action utilisateur
+      WS->>CM: Transmettre à la conversation active
+      CM->>AG: Lancer ou poursuivre le tour de l’agent
+      AG->>RT: Exécuter les outils sur le workspace
+      RT-->>AG: Résultat de l’outil / observation
+      AG->>ES: Ajouter l’action et l’observation au flux
+      ES-->>WS: Événements ordonnés de la conversation
+      WS-->>UI: Mettre à jour terminal, fichiers et état de l’agent
+      Note over UI,ES: Après une coupure, replay des événements depuis latest_event_id`,
+    sources:['README.md','frontend/vite.config.ts','frontend/src/routes/conversation.tsx','frontend/src/routes/changes-tab.tsx','openhands/server/app.py','openhands/server/listen.py','openhands/server/listen_socket.py','openhands/server/routes/conversation.py','openhands/server/routes/manage_conversations.py','openhands/runtime/__init__.py','openhands/app_server/app_lifespan/alembic/versions/001.py','openhands/app_server/app_conversation/sql_app_conversation_info_service.py','openhands/app_server/app_conversation/sql_app_conversation_start_task_service.py','openhands-cli/pyproject.toml'],
   },
 }

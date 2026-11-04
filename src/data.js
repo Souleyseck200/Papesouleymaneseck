@@ -11,7 +11,7 @@ export const cases = [
     status: 'Prototype de plateforme multi-interface',
     stack: ['React Native / Expo', 'Node.js', 'TypeScript', 'Prisma', 'Socket.IO', 'Electron'],
     challenge: 'Le besoin ne se limite pas à envoyer une notification. Une alerte doit circuler entre un citoyen, des agents et un poste de commandement, en gardant une trace de sa prise en charge.',
-    solution: 'J’ai structuré les parcours par rôle autour d’un même modèle d’alerte et de mission. L’API gère les données durables; les événements Socket.IO diffusent les changements aux interfaces concernées.',
+    solution: 'Les parcours par rôle s’appuient sur un même modèle d’alerte et de mission. L’API conserve les données durables, tandis que Socket.IO diffuse les changements aux interfaces concernées.',
     decision: 'Séparer les changements persistés des événements temps réel pour que chaque acteur retrouve l’état d’une mission après une reconnexion.',
     flows: [
       'Le citoyen crée un signalement avec sa localisation et les éléments disponibles.',
@@ -42,7 +42,7 @@ export const cases = [
     status: 'Plateforme en développement',
     stack: ['Next.js', 'React', 'TypeScript', 'PostgreSQL', 'Supabase'],
     challenge: 'La direction, les enseignants, les élèves et les familles n’ont pas les mêmes besoins, mais travaillent sur des données communes : classes, présence, évaluations et paiements.',
-    solution: 'J’ai organisé la plateforme en modules métier et en espaces de travail distincts. Un parcours transversal permet de suivre les informations d’un élève depuis son inscription jusqu’aux vues pédagogiques et administratives.',
+    solution: 'La plateforme est organisée en modules métier et en espaces adaptés aux profils de l’école. Un parcours transversal relie les informations d’un élève, de son inscription aux vues pédagogiques et administratives.',
     decision: 'Construire le produit autour des entités et des rôles de l’école, plutôt que multiplier des écrans indépendants qui dupliquent les données.',
     flows: [
       'L’école structure ses classes, ses utilisateurs et ses informations de référence.',
@@ -73,7 +73,7 @@ export const cases = [
     status: 'Projet client évolutif',
     stack: ['React', 'TypeScript', 'Supabase', 'PostgreSQL', 'Zustand'],
     challenge: 'Le besoin initial portait sur des formulaires et une interface interne. Il s’est étendu aux mandats, locations, paiements, documents et règles de répartition comptable.',
-    solution: 'J’ai relié les événements immobiliers aux opérations financières et aux documents qui en dépendent. Le type de mandat détermine les règles applicables, dont les taux et le document à générer.',
+    solution: 'Les événements immobiliers alimentent les opérations financières et les documents associés. Le type de mandat détermine les règles applicables, notamment les taux et le document à générer.',
     decision: 'Conserver le lien entre un paiement et ses écritures permet de retrouver l’origine d’un montant et d’expliquer une annulation.',
     flows: [
       'Un bien et ses acteurs sont enregistrés dans le système.',
@@ -136,13 +136,13 @@ export const cases = [
     status: 'Outil interne et plateforme en évolution',
     stack: ['React', 'Vite', 'Express', 'Supabase', 'Gemini'],
     challenge: 'Un client décrit souvent son projet sans préciser les profils, les écrans, les données ou les règles importantes pour le développement.',
-    solution: 'Le parcours guide la découverte du besoin puis utilise un service d’IA pour structurer la matière recueillie. Le résultat aide à préparer le périmètre, les écrans et les diagrammes que je relis ensuite.',
+    solution: 'Le parcours clarifie le besoin puis utilise un service d’IA pour structurer les informations recueillies. La synthèse prépare le périmètre, les écrans et les diagrammes, qui font ensuite l’objet d’une revue.',
     decision: 'Placer l’IA dans un processus de cadrage guidé lui donne un contexte plus utile qu’une simple zone de chat libre.',
     flows: [
       'Le client présente son idée et répond aux questions de cadrage.',
       'L’API organise les informations et appelle le service IA.',
       'L’outil produit une synthèse et des pistes de structure du projet.',
-      'Je révise le dossier avant de l’utiliser comme base de conception.'
+      'Une revue du dossier précède son utilisation comme base de conception.'
     ],
     data: ['Brief', 'Réponse', 'Projet', 'Synthèse', 'Livrable de cadrage'],
     boundary: 'Les livrables de l’IA sont des aides à la conception. Leur exactitude et leur faisabilité nécessitent une revue humaine.',
@@ -155,8 +155,47 @@ export const cases = [
       D --> H["Revue humaine"]`,
   },
   {
-    id: 'maritime',
+    id: 'opendevin',
     number: '06',
+    title: 'OpenHands',
+    category: 'Agent IA · outils de développement',
+    image: null,
+    lead: 'Un agent de développement qui transforme une consigne en actions sur un dépôt de code.',
+    status: 'Agent open source · interface locale et CLI',
+    stack: ['Python', 'FastAPI', 'React', 'TypeScript', 'Vite', 'Socket.IO', 'SQLAlchemy', 'Alembic', 'Docker', 'Hatch'],
+    challenge: 'Faire travailler un agent dans un dépôt exige de relier l’interface de conversation, le serveur, les événements, les outils et un environnement d’exécution.',
+    solution: 'OpenHands réunit une interface locale, des API Python et plusieurs types de runtime. Les échanges passent par des actions et des observations associées à une conversation; le flux reste consultable après reconnexion.',
+    decision: 'L’abstraction des runtimes permet de faire évoluer l’environnement d’exécution sans confondre l’interface, la gestion des conversations et les outils qui agissent sur le code.',
+    flows: [
+      'Choix du dépôt et configuration du modèle.',
+      'Création de la conversation et du runtime.',
+      'Transmission des actions à l’agent.',
+      'Exécution des outils dans l’environnement de travail.',
+      'Persistance des événements et observations.',
+      'Mise à jour de l’interface puis reprise du flux après reconnexion.'
+    ],
+    data: ['Utilisateur', 'Dépôt', 'Conversation', 'Tâche de démarrage', 'Runtime / sandbox', 'Action', 'Observation', 'Événement'],
+    boundary: 'Les évolutions locales étudiées portent sur le build Vite, le montage conditionnel de la SPA, le démarrage des migrations Alembic et l’inclusion du paquet CLI dans le wheel Hatch.',
+    diagram: `flowchart TB
+      U[Utilisateur] --> UI[Interface React / Vite]
+      UI -->|REST : paramètres et conversations| API[API FastAPI]
+      UI <-->|Socket.IO : actions et événements| SIO[Serveur temps réel]
+      API --> CM[Conversation Manager]
+      SIO --> CM
+      CM --> TASK[(app_conversation_start_task)]
+      CM --> META[(conversation_metadata)]
+      CM --> RUNTIME[Service de runtime]
+      RUNTIME --> BOX[Docker · Local · Remote · Kubernetes · CLI]
+      BOX --> AGENT[Agent et outils de développement]
+      AGENT -->|actions et observations| STREAM[Flux d’événements]
+      STREAM --> STORE[(Event Store par conversation)]
+      STREAM --> SIO
+      STORE -->|replay depuis le dernier événement| SIO
+      SIO --> UI`,
+  },
+  {
+    id: 'maritime',
+    number: '07',
     title: 'Maritime',
     category: 'Données géospatiales · vision par ordinateur',
     image: '/images/maritime.png',
