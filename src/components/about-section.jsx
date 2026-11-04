@@ -15,7 +15,7 @@ export function AboutSection() {
   const imageY = useTransform(scrollYProgress, [0, 1], [24, -24])
   return <section id="parcours" className="scroll-mt-20">
     <div ref={ref} className="relative isolate overflow-hidden bg-navy text-white">
-      <motion.img src="/images/portrait-hq-transparent.png" alt="Pape Souleymane Seck" width="1183" height="1329" loading="lazy" style={reduced ? {} : { y: imageY }} className="absolute right-0 bottom-0 -z-10 h-[94%] w-[90%] object-contain object-right-bottom opacity-40 md:w-[54%] md:opacity-100"/>
+      <motion.img src="/images/portrait-hq-transparent.webp" alt="Pape Souleymane Seck" width="1183" height="1329" loading="lazy" decoding="async" style={reduced ? {} : { y: imageY }} className="absolute right-0 bottom-0 -z-10 h-[94%] w-[90%] object-contain object-right-bottom opacity-40 md:w-[54%] md:opacity-100"/>
       <div className="absolute inset-0 -z-10 bg-linear-to-r from-navy via-navy/85 to-navy/10 md:via-navy/75 md:to-transparent"/>
       <div className="absolute inset-x-0 bottom-0 -z-10 h-28 bg-linear-to-t from-navy/70 to-transparent"/>
       <div className="relative flex min-h-120 items-center px-6 py-16 sm:px-10 sm:py-20 md:min-h-145 lg:px-16">

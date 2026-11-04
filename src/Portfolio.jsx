@@ -26,12 +26,12 @@ const cases=originalCases.map(enrich)
 const extraCases=originalExtraCases.map(enrich)
 
 const colors = {
-  alertsec: { card:'bg-[#cbff49]', soft:'bg-[#f2f8df]', text:'text-[#4b621b]', image:'/images/dakar.png', short:'Une alerte. Plusieurs acteurs. Un même état de mission.', type:'Sécurité', year:'Projet de fin d’études' },
-  edukora: { card:'bg-[#eee9e2]', soft:'bg-[#f8f5ef]', text:'text-[#877357]', image:'/images/school.png', short:'L’école, ses utilisateurs et ses opérations quotidiennes.', type:'Éducation', year:'Axis' },
-  viva: { card:'bg-[#e8e4fc]', soft:'bg-[#f6f3ff]', text:'text-[#7d68b2]', image:'/images/real-estate.png', short:'Des biens immobiliers aux écritures comptables.', type:'Immobilier', year:'Client · 2026' },
+  alertsec: { card:'bg-[#cbff49]', soft:'bg-[#f2f8df]', text:'text-[#4b621b]', image:'/images/dakar.webp', short:'Une alerte. Plusieurs acteurs. Un même état de mission.', type:'Sécurité', year:'Projet de fin d’études' },
+  edukora: { card:'bg-[#eee9e2]', soft:'bg-[#f8f5ef]', text:'text-[#877357]', image:'/images/school.webp', short:'L’école, ses utilisateurs et ses opérations quotidiennes.', type:'Éducation', year:'Axis' },
+  viva: { card:'bg-[#e8e4fc]', soft:'bg-[#f6f3ff]', text:'text-[#7d68b2]', image:'/images/real-estate.webp', short:'Des biens immobiliers aux écritures comptables.', type:'Immobilier', year:'Client · 2026' },
   jokko: { card:'bg-[#dceeff]', soft:'bg-[#f1f7fc]', text:'text-[#4f81aa]', short:'Des messages qui reprennent le fil après une coupure.', type:'Communication', year:'Projet personnel' },
   axis: { card:'bg-[#ffe5d2]', soft:'bg-[#fff4ec]', text:'text-[#b16b32]', short:'Du brief client au dossier de conception assisté par IA.', type:'IA appliquée', year:'Axis' },
-  maritime: { card:'bg-[#dceae7]', soft:'bg-[#f0f7f5]', text:'text-[#487b71]', image:'/images/maritime.png', short:'Transformer une scène satellite en observation située.', type:'Géospatial', year:'Recherche & prototype' },
+  maritime: { card:'bg-[#dceae7]', soft:'bg-[#f0f7f5]', text:'text-[#487b71]', image:'/images/maritime.webp', short:'Transformer une scène satellite en observation située.', type:'Géospatial', year:'Recherche & prototype' },
 }
 
 function SectionHeading({ label, title, children }) {
@@ -56,7 +56,7 @@ function Hero({ go }) {
         </dl>
       </div>
       <motion.div initial={reduced?false:{opacity:0}} animate={{opacity:1}} transition={{duration:1,delay:.15}} className="relative -mx-6 mt-6 h-84 sm:-mx-10 sm:h-104 md:mx-0 md:mt-0 md:h-auto">
-        <motion.img src="/images/portrait-hq-transparent.png" alt="Portrait de Pape Souleymane Seck, avec les épaules et le buste visibles" style={reduced ? {} : {y:imageY}} fetchPriority="high" width="1183" height="1329" className="absolute bottom-0 left-1/2 h-full w-full max-w-none -translate-x-1/2 object-contain object-bottom md:h-[94%] md:w-[116%]" />
+        <motion.img src="/images/portrait-hq-transparent.webp" alt="Portrait de Pape Souleymane Seck, avec les épaules et le buste visibles" style={reduced ? {} : {y:imageY}} fetchPriority="high" decoding="async" width="1183" height="1329" className="absolute bottom-0 left-1/2 h-full w-full max-w-none -translate-x-1/2 object-contain object-bottom md:h-[94%] md:w-[116%]" />
       </motion.div>
     </div>
   </section>
@@ -81,7 +81,7 @@ function ProjectCarousel({ go }) {
     <div ref={viewport} className="overflow-hidden px-6 sm:px-10 lg:px-16"><div className="flex touch-pan-y gap-4">
       {cases.map(project=>{const theme=colors[project.id];return <motion.a key={project.id} href={`#${project.id}`} whileHover={{y:-5}} transition={{duration:.3}} className={cn('group block min-w-0 flex-[0_0_83%] overflow-hidden rounded-[24px] focus-visible:outline-2 focus-visible:outline-accent sm:flex-[0_0_43%] lg:flex-[0_0_28%] xl:flex-[0_0_25.5%]',theme.card)}>
         <div className="min-h-51 p-6"><div className="mb-5 flex gap-1.5"><span className="rounded-md bg-white/75 px-2 py-1 text-[9px]">{theme.type}</span><span className="rounded-md bg-white/75 px-2 py-1 text-[9px]">{theme.year}</span></div><h3 className="mb-3 text-3xl leading-none font-bold tracking-[-.05em]">{project.title}</h3><p className="max-w-55 text-xs leading-relaxed text-neutral-700">{theme.short}</p></div>
-        <div className="relative h-53 overflow-hidden rounded-t-[22px]">{theme.image?<img src={theme.image} alt={project.imageAlt} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"/>:<Miniature project={project}/>}<span className="absolute bottom-4 left-4 inline-flex items-center gap-3 rounded-full bg-white/95 py-2 pr-2 pl-4 text-[10px] shadow-sm">Voir l’étude de cas <span className="grid size-6 place-items-center rounded-full bg-white text-black"><ArrowUpRight size={15}/></span></span></div>
+        <div className="relative h-53 overflow-hidden rounded-t-[22px]">{theme.image?<img src={theme.image} alt={project.imageAlt} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"/>:<Miniature project={project}/>}<span className="absolute bottom-4 left-4 inline-flex items-center gap-3 rounded-full bg-white/95 py-2 pr-2 pl-4 text-[10px] shadow-sm">Voir l’étude de cas <span className="grid size-6 place-items-center rounded-full bg-white text-black"><ArrowUpRight size={15}/></span></span></div>
       </motion.a>})}
     </div></div>
     <p className="mt-5 px-6 text-[11px] text-neutral-400 sm:px-10 lg:px-16">Faites glisser les projets ou utilisez les flèches. Les études de cas se trouvent juste en dessous.</p>
