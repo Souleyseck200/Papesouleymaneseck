@@ -1,9 +1,9 @@
 import React from 'react'
-import { createRoot } from 'react-dom/client'
+import { hydrateRoot } from 'react-dom/client'
 import App from './Portfolio'
 import './theme.css'
 
-createRoot(document.getElementById('root')).render(
+hydrateRoot(document.getElementById('root'),
   <React.StrictMode>
     <App />
   </React.StrictMode>,
