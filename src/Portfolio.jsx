@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 import useEmblaCarousel from 'embla-carousel-react'
 import { ArrowRight, ArrowUpRight, ArrowLeft, ArrowDown, AsteriskSimple, List, X, Play, Pause, MagnifyingGlass, Database, TreeStructure, EnvelopeSimple, Phone, MapPin, Check } from '@phosphor-icons/react'
+import { Analytics } from '@vercel/analytics/react'
 import { Button } from './components/ui/button'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './components/ui/accordion'
 import { ProjectDiagrams } from './components/project-diagrams'
@@ -143,6 +144,6 @@ export default function Portfolio() {
       <ProjectRequestForm/>
     </main>
     <footer className="flex items-center justify-between gap-4 px-7 py-5 text-[10px] text-neutral-400 sm:px-12"><span>© {new Date().getFullYear()} Pape Souleymane Seck</span><button onClick={()=>go('accueil')} className="flex items-center gap-2 hover:text-black">Retour en haut <ArrowUpRight size={13}/></button></footer>
+    <Analytics />
   </div>
 }
-
